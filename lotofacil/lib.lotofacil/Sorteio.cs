@@ -34,4 +34,25 @@ public class Sorteio
         return jogos.Count();
     }
 
+    public int[] GeraNumerosAleatorios()
+    {
+        int[] numeros = new int[6];
+        Random random = new Random();
+        while (numeros.Distinct().Count() != 6)
+        {
+            numeros = new int[]
+            {
+                random.Next(1, 60),
+                random.Next(1, 60),
+                random.Next(1, 60),
+                random.Next(1, 60),
+                random.Next(1, 60),
+                random.Next(1, 60),
+            };
+            
+        }
+        return numeros;
+
+    }
+
 }

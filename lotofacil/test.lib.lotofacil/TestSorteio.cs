@@ -97,6 +97,20 @@ public class Tests
 
     }
 
+    //Outra funcionalidade será a capacidade de gerar 6 números aleatoriamente;
 
+    [Test]
+    public void TestaNumerosAleatorios()
+    {
+        var sorteio = new Sorteio(5);
+        var numeros = sorteio.GeraNumerosAleatorios();
 
+        Assert.AreEqual(numeros.Count(), 6);
+        Assert.AreEqual(numeros.Distinct().Count(), 6);
+
+        for (int i = 0; i < numeros.Count(); i++) {
+            Assert.LessOrEqual(numeros[i], 60);
+            Assert.GreaterOrEqual(numeros[i], 1);
+        }
+    }
 }
