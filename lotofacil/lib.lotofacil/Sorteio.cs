@@ -26,6 +26,11 @@ public class Sorteio
         {
             throw new Exception("Numeros não podem ser repetidos");
         }
+
+        if(jogo.NumerosSelecionados.Any(n => n > 60 || n < 1))
+        {
+            throw new Exception("Número fora raio");
+        }
         jogos.Add(jogo);
     }
 

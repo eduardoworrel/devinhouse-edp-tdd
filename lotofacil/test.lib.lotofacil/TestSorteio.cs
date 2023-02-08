@@ -113,4 +113,38 @@ public class Tests
             Assert.GreaterOrEqual(numeros[i], 1);
         }
     }
+
+    [Test]
+    public void TestaBilheteNaoContemNumeroMaiorQue60eMenorQue1()
+    {
+        var sorteio = new Sorteio(5);
+        Assert.Catch(() => {
+            sorteio.addJogo(
+                new Jogo{
+                    Nome="Andre",
+                    CPF="000000000",
+                    NumerosSelecionados=new int[]{1,2,3,4,5,61}
+                }
+            );
+        });
+        
+        Assert.Catch(() => {
+            sorteio.addJogo(
+                new Jogo{
+                    Nome="Andre",
+                    CPF="000000000",
+                    NumerosSelecionados=new int[]{1,2,3,4,5,0}
+                }
+            );
+        });
+        Assert.DoesNotThrow(() => {
+            sorteio.addJogo(
+                new Jogo{
+                    Nome="Andre",
+                    CPF="000000000",
+                    NumerosSelecionados=new int[]{1,2,3,4,5,6}
+                }
+            );
+        });
+    }
 }
