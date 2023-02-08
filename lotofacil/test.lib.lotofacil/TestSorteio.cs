@@ -41,4 +41,62 @@ public class Tests
 
         Assert.AreEqual(sorteio.GetQuantidadeJogos(),qtJogos);
     }
+
+    [Test]
+
+    public void TestaQuantidadeNumerosValida()
+    {
+        var sorteio = new Sorteio(5);
+        Assert.Catch(() => {
+            sorteio.addJogo(
+                new Jogo{
+                    Nome="Andre",
+                    CPF="000000000",
+                    NumerosSelecionados=new int[]{1,2,3,4,5,6,8}
+                }
+            );
+        });
+
+         Assert.Catch(() => {
+            sorteio.addJogo(
+                new Jogo{
+                    Nome="Andre",
+                    CPF="000000000",
+                    NumerosSelecionados=new int[]{1,2,3,4}
+                }
+            );
+        });
+
+         Assert.DoesNotThrow(() => {
+            sorteio.addJogo(
+                new Jogo{
+                    Nome="Andre",
+                    CPF="000000000",
+                    NumerosSelecionados=new int[]{1,2,3,4,5,6}
+                }
+            );
+        });
+
+    }
+
+
+     [Test]
+
+    public void TestaNumerosRepetidos()
+    {
+        var sorteio = new Sorteio(5);
+        Assert.Catch(() => {
+            sorteio.addJogo(
+                new Jogo{
+                    Nome="Andre",
+                    CPF="000000000",
+                    NumerosSelecionados=new int[]{1,2,3,4,4,5}
+                }
+            );
+        });       
+
+    }
+
+
+
 }
