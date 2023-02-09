@@ -14,7 +14,7 @@ public class Tests
     {
         var sorteio = new Sorteio(1000);
         var valor = sorteio.GetValorPremio();
-        Assert.AreEqual(valor,1000);
+        Assert.AreEqual(valor, 1000);
     }
 
 
@@ -29,17 +29,19 @@ public class Tests
     {
         var sorteio = new Sorteio(1000);
 
-        for(var i = 0; i < qtJogos;i++){
+        for (var i = 0; i < qtJogos; i++)
+        {
             sorteio.addJogo(
-                new Jogo{
-                    Nome="Renan",
-                    CPF="000000000",
-                    NumerosSelecionados=new int[]{1,2,3,4,5,6}
+                new Jogo
+                {
+                    Nome = "Renan",
+                    CPF = "000000000",
+                    NumerosSelecionados = new int[] { 1, 2, 3, 4, 5, 6 }
                 }
             );
         }
 
-        Assert.AreEqual(sorteio.GetQuantidadeJogos(),qtJogos);
+        Assert.AreEqual(sorteio.GetQuantidadeJogos(), qtJogos);
     }
 
     [Test]
@@ -47,32 +49,38 @@ public class Tests
     public void TestaQuantidadeNumerosValida()
     {
         var sorteio = new Sorteio(5);
-        Assert.Catch(() => {
+        Assert.Catch(() =>
+        {
             sorteio.addJogo(
-                new Jogo{
-                    Nome="Andre",
-                    CPF="000000000",
-                    NumerosSelecionados=new int[]{1,2,3,4,5,6,8}
+                new Jogo
+                {
+                    Nome = "Andre",
+                    CPF = "000000000",
+                    NumerosSelecionados = new int[] { 1, 2, 3, 4, 5, 6, 8 }
                 }
             );
         });
 
-         Assert.Catch(() => {
+        Assert.Catch(() =>
+        {
             sorteio.addJogo(
-                new Jogo{
-                    Nome="Andre",
-                    CPF="000000000",
-                    NumerosSelecionados=new int[]{1,2,3,4}
+                new Jogo
+                {
+                    Nome = "Andre",
+                    CPF = "000000000",
+                    NumerosSelecionados = new int[] { 1, 2, 3, 4 }
                 }
             );
         });
 
-         Assert.DoesNotThrow(() => {
+        Assert.DoesNotThrow(() =>
+        {
             sorteio.addJogo(
-                new Jogo{
-                    Nome="Andre",
-                    CPF="000000000",
-                    NumerosSelecionados=new int[]{1,2,3,4,5,6}
+                new Jogo
+                {
+                    Nome = "Andre",
+                    CPF = "000000000",
+                    NumerosSelecionados = new int[] { 1, 2, 3, 4, 5, 6 }
                 }
             );
         });
@@ -80,20 +88,22 @@ public class Tests
     }
 
 
-     [Test]
+    [Test]
 
     public void TestaNumerosRepetidos()
     {
         var sorteio = new Sorteio(5);
-        Assert.Catch(() => {
+        Assert.Catch(() =>
+        {
             sorteio.addJogo(
-                new Jogo{
-                    Nome="Andre",
-                    CPF="000000000",
-                    NumerosSelecionados=new int[]{1,2,3,4,4,5}
+                new Jogo
+                {
+                    Nome = "Andre",
+                    CPF = "000000000",
+                    NumerosSelecionados = new int[] { 1, 2, 3, 4, 4, 5 }
                 }
             );
-        });       
+        });
 
     }
 
@@ -108,7 +118,8 @@ public class Tests
         Assert.AreEqual(numeros.Count(), 6);
         Assert.AreEqual(numeros.Distinct().Count(), 6);
 
-        for (int i = 0; i < numeros.Count(); i++) {
+        for (int i = 0; i < numeros.Count(); i++)
+        {
             Assert.LessOrEqual(numeros[i], 60);
             Assert.GreaterOrEqual(numeros[i], 1);
         }
@@ -118,33 +129,99 @@ public class Tests
     public void TestaBilheteNaoContemNumeroMaiorQue60eMenorQue1()
     {
         var sorteio = new Sorteio(5);
-        Assert.Catch(() => {
+        Assert.Catch(() =>
+        {
             sorteio.addJogo(
-                new Jogo{
-                    Nome="Andre",
-                    CPF="000000000",
-                    NumerosSelecionados=new int[]{1,2,3,4,5,61}
+                new Jogo
+                {
+                    Nome = "Andre",
+                    CPF = "000000000",
+                    NumerosSelecionados = new int[] { 1, 2, 3, 4, 5, 61 }
                 }
             );
         });
-        
-        Assert.Catch(() => {
+
+        Assert.Catch(() =>
+        {
             sorteio.addJogo(
-                new Jogo{
-                    Nome="Andre",
-                    CPF="000000000",
-                    NumerosSelecionados=new int[]{1,2,3,4,5,0}
+                new Jogo
+                {
+                    Nome = "Andre",
+                    CPF = "000000000",
+                    NumerosSelecionados = new int[] { 1, 2, 3, 4, 5, 0 }
                 }
             );
         });
-        Assert.DoesNotThrow(() => {
+        Assert.DoesNotThrow(() =>
+        {
             sorteio.addJogo(
-                new Jogo{
-                    Nome="Andre",
-                    CPF="000000000",
-                    NumerosSelecionados=new int[]{1,2,3,4,5,6}
+                new Jogo
+                {
+                    Nome = "Andre",
+                    CPF = "000000000",
+                    NumerosSelecionados = new int[] { 1, 2, 3, 4, 5, 6 }
                 }
             );
         });
     }
+
+    [Test]
+    public void TestaHouveGanhadores()
+    {
+        Jogo jogo01 = new Jogo
+        {
+            Nome = "Eduardo",
+            CPF = "111111111",
+            NumerosSelecionados = new int[] { 1, 2, 3, 4, 5, 6 }
+        };
+        Jogo jogo02 = new Jogo
+        {
+            Nome = "Roni",
+            CPF = "2222222",
+            NumerosSelecionados = new int[] { 1, 2, 3, 4, 5, 7 }
+        };
+        Jogo jogo03 = new Jogo
+        {
+            Nome = "Nicolas",
+            CPF = "0282828282",
+            NumerosSelecionados = new int[] { 1, 2, 3, 4, 8, 9 }
+        };
+        Jogo jogo04 = new Jogo
+        {
+            Nome = "Renan",
+            CPF = "0282828282",
+            NumerosSelecionados = new int[] { 1, 2, 3, 4, 5, 9 }
+        };
+        Jogo jogo05 = new Jogo
+        {
+            Nome = "Nicolas",
+            CPF = "0282828282",
+            NumerosSelecionados = new int[] { 1, 2, 3, 4, 8, 9 }
+        };
+        Jogo jogo06 = new Jogo
+        {
+            Nome = "Nicolas",
+            CPF = "0282828282",
+            NumerosSelecionados = new int[] { 1, 2, 3, 4, 8, 9 }
+        };
+
+        var sorteio = new Sorteio(132);
+        sorteio.addJogo(jogo01);
+        sorteio.addJogo(jogo02);
+        sorteio.addJogo(jogo03);
+        sorteio.addJogo(jogo04);
+        sorteio.addJogo(jogo05);
+        sorteio.addJogo(jogo06);
+
+        //var numerosSorteados = sorteio.GeraNumerosAleatorios();
+        sorteio.Sorteia(new int[] { 1, 2, 3, 4, 5, 6 });
+
+
+        Assert.AreEqual(sorteio.acertou6.Count(), 1);
+        Assert.AreEqual(sorteio.acertou5.Count(), 2);
+        Assert.AreEqual(sorteio.acertou4.Count(), 3);
+    }
+
+
+
 }
