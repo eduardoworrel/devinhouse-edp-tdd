@@ -78,7 +78,38 @@ public class Sorteio
 
     }
 
+    public void DistribuiPremiacao() 
+    {
+        double ganhou6 = 0;
+        double ganhou5 = 0;
+        double ganhou4 = 0;
 
+        if (acertou6.Count > 0) 
+        { 
+            ganhou6 = (GetValorPremio() * 0.8) / acertou6.Count;
+        }
+        if (acertou5.Count > 0)
+        {
+            ganhou5 = (GetValorPremio() * 0.15) / acertou5.Count;
+        }
+        if (acertou4.Count > 0)
+        {
+            ganhou4 = (GetValorPremio() * 0.05) / acertou4.Count;
+        }
+
+        foreach (var item in acertou6)
+        {
+            item.Premiacao = ganhou6;
+        }
+        foreach (var item in acertou5)
+        {
+            item.Premiacao = ganhou5;
+        }
+        foreach (var item in acertou4)
+        {
+            item.Premiacao = ganhou4;
+        }
+    }
 
     private int ComparaNumeros(int[] jogoJogado, int[] numerosReferencia)
     {
@@ -86,5 +117,7 @@ public class Sorteio
         return jogoJogado.Intersect(numerosReferencia).Count();
 
     }
+
+
 
 }
