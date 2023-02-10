@@ -78,32 +78,33 @@ public class Sorteio
 
     }
 
-    public double DividePorcentagemPremio(double valorPorcentagem, int qtVencedores, double premio)
+    public decimal DividePorcentagemPremio(decimal valorPorcentagem, int qtVencedores, decimal premio)
     {
-        if (qtVencedores <= 0)
+        if (qtVencedores <= 0)//Renam começa aqui!!!!
             throw new Exception("Valores não podem ser 0");
         if (premio <= 0 || valorPorcentagem <= 0)
             return 0;
+
         return (premio * valorPorcentagem) / qtVencedores;
     }
 
     public void DistribuiPremiacao() 
     {
-        double ganhou6 = 0;
-        double ganhou5 = 0;
-        double ganhou4 = 0;
+        decimal ganhou6 = 0;
+        decimal ganhou5 = 0;
+        decimal ganhou4 = 0;
 
         if (acertou6.Count > 0) 
         { 
-            ganhou6 = DividePorcentagemPremio(0.8, acertou6.Count, GetValorPremio());
+            ganhou6 = DividePorcentagemPremio(0.8m, acertou6.Count, GetValorPremio());
         }
         if (acertou5.Count > 0)
         {
-            ganhou5 = DividePorcentagemPremio(0.15, acertou5.Count, GetValorPremio());
+            ganhou5 = DividePorcentagemPremio(0.15m, acertou5.Count, GetValorPremio());
         }
         if (acertou4.Count > 0)
         {
-            ganhou4 = DividePorcentagemPremio(0.05, acertou4.Count, GetValorPremio());
+            ganhou4 = DividePorcentagemPremio(0.05m, acertou4.Count, GetValorPremio());
         }
 
         foreach (var item in acertou6)
