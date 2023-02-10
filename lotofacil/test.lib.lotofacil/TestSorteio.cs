@@ -204,14 +204,45 @@ public class Tests
     80% para os que acertaram 6 números, 
     15% para os que acertaram 5 números 
     e 5% para os que acertaram 4 números;*/
-    [TestCase(7, 80, 2, 1000000)]
-    [TestCase(0, 0, 0, 1000001)]
+    [TestCase(1, 80, 2, 1000000)]
+    [TestCase(1, 1, 1, 1000001)]
     [TestCase(3, 3, 3, 20)]
-    [TestCase(0, 0, 1, 100)]
-    [TestCase(0, 1, 0, 190)]
-    [TestCase(1, 0, 0, 1)]
+    [TestCase(2, 2, 1, 100)]
+    [TestCase(3, 1, 3, 190)]
+    [TestCase(1, 4, 4, 0)]
     public void ChecaCalculoPremiacao(int qt4, int qt5, int qt6, int premio)
     {
+        var s = new Sorteio(premio);
+        
+        Assert.AreEqual(s.DividePorcentagemPremio(0.8, qt6, premio), (s.GetValorPremio() * 0.8) / qt6);
+        Assert.AreEqual(s.DividePorcentagemPremio(0.15, qt5, premio), (s.GetValorPremio() * 0.15) / qt5);
+        Assert.AreEqual(s.DividePorcentagemPremio(0.05, qt4, premio), (s.GetValorPremio() * 0.05) / qt4);
+    }
+
+    [TestCase(1, 80, 2, 1000000)]
+    [TestCase(1, 1, 1, 1000001)]
+    [TestCase(3, 3, 3, 20)]
+    [TestCase(2, 2, 1, 100)]
+    [TestCase(3, 1, 3, 190)]
+    [TestCase(1, 4, 4, 0)]
+    public void ChecaDistribuicaoPremios(int qt4, int qt5, int qt6, int premio)
+    {
+        var s = new Sorteio(1);
+
+        foreach (var i in s.acertou6)
+        {
+            Assert.AreEqual(i.Premiacao, s.DividePorcentagemPremio(0.8, qt6, premio));
+        }
+        foreach (var i in s.acertou5)
+        {
+            Assert.AreEqual(i.Premiacao, s.DividePorcentagemPremio(0.8, qt5, premio));
+        }
+        foreach (var i in s.acertou4)
+        {
+            Assert.AreEqual(i.Premiacao, s.DividePorcentagemPremio(0.05, qt4, premio));
+        }
+    }
+    /*{
         double ganhou6 = 0;
         double ganhou5 = 0;
         double ganhou4 = 0;
@@ -259,6 +290,6 @@ public class Tests
         {
             Assert.AreEqual(item.Premiacao, ganhou4);
         }
-    }
+    }*/
 
 }
