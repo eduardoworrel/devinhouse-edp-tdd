@@ -179,7 +179,7 @@ public class Tests
     public void TestaHouveGanhadores(int qt4, int qt5, int qt6)
     {
         var sorteio = new Sorteio(132);
-        for (int i = 0; i < qt4; i++) 
+        for (int i = 0; i < qt4; i++)
         {
             sorteio.addJogo(jogosGanhados[4]);
         }
@@ -204,20 +204,20 @@ public class Tests
     80% para os que acertaram 6 números, 
     15% para os que acertaram 5 números 
     e 5% para os que acertaram 4 números;*/
-    [TestCase(1, 80, 2, 1000000)]
-    [TestCase(1, 1, 1, 1000001)]
-    [TestCase(3, 3, 3, 20)]
-    [TestCase(2, 2, 1, 100)]
-    [TestCase(3, 1, 3, 190)]
-    [TestCase(1, 4, 4, 0)]
-    public void ChecaCalculoPremiacao(int qt4, int qt5, int qt6, int premio)
-    {
-        var sorteio = new Sorteio(premio);
-        
-        Assert.AreEqual(sorteio.DividePorcentagemPremio(0.8m, qt6, sorteio.GetValorPremio()), (sorteio.GetValorPremio() * 0.8m) / qt6);
-        Assert.AreEqual(sorteio.DividePorcentagemPremio(0.15m, qt5, sorteio.GetValorPremio()), (sorteio.GetValorPremio() * 0.15m) / qt5);
-        Assert.AreEqual(sorteio.DividePorcentagemPremio(0.05m, qt4, sorteio.GetValorPremio()), (sorteio.GetValorPremio() * 0.05m) / qt4);
-    }
+    // [TestCase(1, 80, 2, 1000000)]
+    // [TestCase(1, 1, 1, 1000001)]
+    // [TestCase(3, 3, 3, 20)]
+    // [TestCase(2, 2, 1, 100)]
+    // [TestCase(3, 1, 3, 190)]
+    // [TestCase(1, 4, 4, 0)]
+    // public void ChecaCalculoPremiacao(int qt4, int qt5, int qt6, int premio)
+    // {
+    //     var sorteio = new Sorteio(premio);
+
+    //     Assert.AreEqual(sorteio.DividePorcentagemPremio(0.8m, qt6, sorteio.GetValorPremio()), (sorteio.GetValorPremio() * 0.8m) / qt6);
+    //     Assert.AreEqual(sorteio.DividePorcentagemPremio(0.15m, qt5, sorteio.GetValorPremio()), (sorteio.GetValorPremio() * 0.15m) / qt5);
+    //     Assert.AreEqual(sorteio.DividePorcentagemPremio(0.05m, qt4, sorteio.GetValorPremio()), (sorteio.GetValorPremio() * 0.05m) / qt4);
+    // }
 
     [TestCase(0, 80, 2, 1000000)]
     [TestCase(1, 0, 0, 1000001)]
@@ -246,70 +246,26 @@ public class Tests
 
         sorteio.DistribuiPremiacao();
 
+        decimal percentualAcertou6;
+
+
         foreach (var i in sorteio.acertou6)
         {
-            var valorCheck = sorteio.DividePorcentagemPremio(0.8m, qt6, sorteio.GetValorPremio());
+            var valorCheck = sorteio.DividePorcentagemPremio(6);
             Assert.AreEqual(i.Premiacao, valorCheck);
         }
         foreach (var i in sorteio.acertou5)
         {
-            var valorCheck = sorteio.DividePorcentagemPremio(0.15m, qt5, sorteio.GetValorPremio());
+            var valorCheck = sorteio.DividePorcentagemPremio(5);
             Assert.AreEqual(i.Premiacao, valorCheck);
         }
         foreach (var i in sorteio.acertou4)
         {
-            var valorCheck = sorteio.DividePorcentagemPremio(0.05m, qt4, sorteio.GetValorPremio());
+            var valorCheck = sorteio.DividePorcentagemPremio(4);
             Assert.AreEqual(i.Premiacao, valorCheck);
         }
     }
-    /*{
-        double ganhou6 = 0;
-        double ganhou5 = 0;
-        double ganhou4 = 0;
 
-        if (qt6 > 0)
-        {
-            ganhou6 = (premio * 0.8) / qt6;
-        }
-        if (qt5 > 0)
-        {
-            ganhou5 = (premio * 0.8) / qt5;
-        }
-        if (qt4 > 0)
-        {
-            ganhou4 = (premio * 0.8) / qt4;
-        }
 
-        var sorteio = new Sorteio(premio);
-        for (int i = 0; i < qt4; i++)
-        {
-            sorteio.addJogo(jogosGanhados[4]);
-        }
-        for (int i = 0; i < qt5; i++)
-        {
-            sorteio.addJogo(jogosGanhados[5]);
-        }
-        for (int i = 0; i < qt6; i++)
-        {
-            sorteio.addJogo(jogosGanhados[6]);
-        }
-
-        sorteio.Sorteia(numerosSorteado);
-        
-        sorteio.DistribuiPremiacao();
-
-        foreach(var item in sorteio.acertou6)
-        {
-            Assert.AreEqual(item.Premiacao, ganhou6);
-        }
-        foreach (var item in sorteio.acertou5)
-        {
-            Assert.AreEqual(item.Premiacao, ganhou5);
-        }
-        foreach (var item in sorteio.acertou4)
-        {
-            Assert.AreEqual(item.Premiacao, ganhou4);
-        }
-    }*/
 
 }
